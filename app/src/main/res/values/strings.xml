@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Mon premier projet</string>
+    <string name="hello_world">Hello World!</string>
+    <string name="key_word">mot cle</string>
+    <string name="mon_bouton">Mon bouton</string>
+    <string name="product_form_text">Ce formulaire vous permet de creer un produit en un instant</string>
+    <string name="designation">Designation</string>
+    <string name="description">Description</string>
+    <string name="price">Prix</string>
+    <string name="quantity_available">Quantite disponible</string>
+    <string name="alert_quantity">Quantite d\'alerte</string>
+    <string name="add">Ajouter</string>
+</resources>
