@@ -135,7 +135,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add"
                 android:padding="@dimen/normal_padding"
-                android:onClick="saveProduct"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/black"
                 android:layout_marginVertical="@dimen/medium_margin"

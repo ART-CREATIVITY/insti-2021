@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/add_menu_item"
+        android:icon="@drawable/ic_add_name"
+        android:title="@string/add"
+        app:showAsAction="always"
+        tools:showAsAction="always" />
+    <item
+        android:id="@+id/settings_menu_item"
+        android:icon="@drawable/ic_settings_name"
+        android:title="@string/settings" />
+</menu>
