@@ -2,6 +2,7 @@ package io.artcreativity.monpremierprojet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,9 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.e(TAG, "saveProduct: " + product);
         Toast.makeText(getApplicationContext(), "J'ai clique", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(MainActivity.this, ProductDetailActivity.class);
+        Intent intent = getIntent();
         intent.putExtra("MY_PROD", product);
-        startActivity(intent);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+//        startActivity(intent);
     }
 
     @Override

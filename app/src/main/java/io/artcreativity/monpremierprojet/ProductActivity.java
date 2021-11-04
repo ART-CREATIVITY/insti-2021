@@ -1,10 +1,14 @@
 package io.artcreativity.monpremierprojet;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -24,6 +28,7 @@ public class ProductActivity extends AppCompatActivity {
     private ActivityProductBinding binding;
     private List<Product> products = new ArrayList<>();
     private ProductAdapter productAdapter;
+    final static int MAIN_CALL = 120;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +47,23 @@ public class ProductActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 
                 Intent intent = new Intent(ProductActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivityIfNeeded(intent, MAIN_CALL);
             }
         });
 
 //        binding.ourListView.setAdapter(new ArrayAdapter<Product>(this, R.layout.simple_product_item, products.toArray(new Product[]{})));
 //        buildSimpleAdapterData();
         buildCustomAdapter();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==MAIN_CALL) {
+            if(resultCode== Activity.RESULT_OK) {
+                Log.e("TAG", "onActivityResult: " + data.getSerializableExtra("MY_PROD"));
+            }
+        }
     }
 
     @Override
