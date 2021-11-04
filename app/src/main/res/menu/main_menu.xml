@@ -7,8 +7,8 @@
         android:id="@+id/add_menu_item"
         android:icon="@drawable/ic_add_name"
         android:title="@string/add"
-        app:showAsAction="always"
-        tools:showAsAction="always" />
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/settings_menu_item"
         android:icon="@drawable/ic_settings_name"

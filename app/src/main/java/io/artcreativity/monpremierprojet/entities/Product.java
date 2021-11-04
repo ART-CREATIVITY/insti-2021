@@ -22,12 +22,6 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", quantityInStock=" + quantityInStock +
-                ", alertQuantity=" + alertQuantity +
-                '}';
+        return name + " (" + price + "F CFA)";
     }
 }
