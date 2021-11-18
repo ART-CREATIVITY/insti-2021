@@ -2,11 +2,13 @@ package io.artcreativity.monpremierprojet;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +23,9 @@ import java.util.Map;
 
 import io.artcreativity.monpremierprojet.adapters.ProductAdapter;
 import io.artcreativity.monpremierprojet.dao.DataBaseHelper;
+import io.artcreativity.monpremierprojet.dao.DataBaseRoom;
 import io.artcreativity.monpremierprojet.dao.ProductDao;
+import io.artcreativity.monpremierprojet.dao.ProductRoomDao;
 import io.artcreativity.monpremierprojet.databinding.ActivityProductBinding;
 import io.artcreativity.monpremierprojet.entities.Product;
 
@@ -32,6 +36,7 @@ public class ProductActivity extends AppCompatActivity {
     private ProductAdapter productAdapter;
     final static int MAIN_CALL = 120;
     private ProductDao productDao;
+    private ProductRoomDao productRoomDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,7 @@ public class ProductActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
         productDao = new ProductDao(this);
+        productRoomDao = DataBaseRoom.getInstance(getApplicationContext()).productRoomDao();
         generateProducts();
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,18 +115,54 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void generateProducts() {
-        products = productDao.findAll();
-        if(products.isEmpty()) {
-            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
-            productDao.insert(new Product("Galaxy Note 10", "Samsung Galaxy Note 10", 800000, 100, 10));
-            productDao.insert(new Product("Redmi S11", "Xiaomi Redmi S11", 300000, 100, 10));
-            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
-            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
-            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
-            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//        products = productDao.findAll();
+//        if(products.isEmpty()) {
+//            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//            productDao.insert(new Product("Galaxy Note 10", "Samsung Galaxy Note 10", 800000, 100, 10));
+//            productDao.insert(new Product("Redmi S11", "Xiaomi Redmi S11", 300000, 100, 10));
+//            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//
+//            products = productDao.findAll();
+//        }
 
-            products = productDao.findAll();
-        }
+        Thread thread = new Thread(new Runnable() {
+            final List<Product> localProducts = new ArrayList<>();
+            @Override
+            public void run() {
+                localProducts.addAll(productRoomDao.findAll());
+                if(localProducts.isEmpty()) {
+                    productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+                    productRoomDao.insert(new Product("Galaxy Note 10", "Samsung Galaxy Note 10", 800000, 100, 10));
+                    productRoomDao.insert(new Product("Redmi S11", "Xiaomi Redmi S11", 300000, 100, 10));
+                    productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+                    productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+                    productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+                    productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+
+                    localProducts.addAll(productRoomDao.findAll());
+                }
+                runOnUiThread(()->{
+                    products.addAll(localProducts);
+                });
+            }
+        });
+        thread.start();
+//        products = productRoomDao.findAll();
+//        if(products.isEmpty()) {
+//            productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//            productRoomDao.insert(new Product("Galaxy Note 10", "Samsung Galaxy Note 10", 800000, 100, 10));
+//            productRoomDao.insert(new Product("Redmi S11", "Xiaomi Redmi S11", 300000, 100, 10));
+//            productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//            productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//            productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//            productRoomDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+//
+//            products = productRoomDao.findAll();
+//        }
+
 
     }
 

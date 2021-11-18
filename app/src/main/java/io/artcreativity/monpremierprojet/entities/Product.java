@@ -1,14 +1,25 @@
 package io.artcreativity.monpremierprojet.entities;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+@Entity
 public class Product implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
     public int id;
+    @ColumnInfo(name = "name")
     public String name;
+    @ColumnInfo(name = "description")
     public String description;
+    @ColumnInfo(name = "price")
     public double price;
+    @ColumnInfo(name = "quantityInStock")
     public double quantityInStock;
+    @ColumnInfo(name = "alertQuantity")
     public double alertQuantity;
 
     public static final String TABLE_NAME = "products";

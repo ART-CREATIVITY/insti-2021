@@ -82,8 +82,20 @@ public class ProductDao {
     }
 
     public Product update(int id, Product product){
+        SQLiteDatabase database = dataBaseHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", product.name);
+        contentValues.put("description", product.description);
+        contentValues.put("price", product.price);
+        contentValues.put("quantityInStock", product.quantityInStock);
+        contentValues.put("alertQuantity", product.alertQuantity);
 
-        return null;
+        String where = "id=?";
+        String[] whereArgs = new String[]{id+""};
+
+        database.update(Product.TABLE_NAME, contentValues, where, whereArgs);
+        product.id = id;
+        return product;
     }
 
     public boolean delete(int id){
