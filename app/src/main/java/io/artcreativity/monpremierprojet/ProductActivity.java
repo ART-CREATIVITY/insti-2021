@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import io.artcreativity.monpremierprojet.adapters.ProductAdapter;
+import io.artcreativity.monpremierprojet.dao.DataBaseHelper;
+import io.artcreativity.monpremierprojet.dao.ProductDao;
 import io.artcreativity.monpremierprojet.databinding.ActivityProductBinding;
 import io.artcreativity.monpremierprojet.entities.Product;
 
@@ -29,6 +31,7 @@ public class ProductActivity extends AppCompatActivity {
     private List<Product> products = new ArrayList<>();
     private ProductAdapter productAdapter;
     final static int MAIN_CALL = 120;
+    private ProductDao productDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-
+        productDao = new ProductDao(this);
         generateProducts();
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +56,14 @@ public class ProductActivity extends AppCompatActivity {
 
 //        binding.ourListView.setAdapter(new ArrayAdapter<Product>(this, R.layout.simple_product_item, products.toArray(new Product[]{})));
 //        buildSimpleAdapterData();
+
         buildCustomAdapter();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
     }
 
     @Override
@@ -62,6 +72,9 @@ public class ProductActivity extends AppCompatActivity {
         if(requestCode==MAIN_CALL) {
             if(resultCode== Activity.RESULT_OK) {
                 Log.e("TAG", "onActivityResult: " + data.getSerializableExtra("MY_PROD"));
+                // TODO: 18/11/2021 Ajout d'un nouveau produit dans la liste
+                Product product = (Product) data.getSerializableExtra("MY_PROD");
+                products.add(product);
             }
         }
     }
@@ -75,6 +88,9 @@ public class ProductActivity extends AppCompatActivity {
     private void buildCustomAdapter() {
         productAdapter = new ProductAdapter(this, products);
         binding.ourListView.setAdapter(productAdapter);
+        binding.ourListView.setOnItemClickListener((adapterView, view, position, id) -> {
+
+        });
     }
 
     private void buildSimpleAdapterData() {
@@ -93,13 +109,18 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void generateProducts() {
-        products.add(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
-        products.add(new Product("Galaxy Note 10", "Samsung Galaxy Note 10", 800000, 100, 10));
-        products.add(new Product("Redmi S11", "Xiaomi Redmi S11", 300000, 100, 10));
-        products.add(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
-        products.add(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
-        products.add(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
-        products.add(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+        products = productDao.findAll();
+        if(products.isEmpty()) {
+            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+            productDao.insert(new Product("Galaxy Note 10", "Samsung Galaxy Note 10", 800000, 100, 10));
+            productDao.insert(new Product("Redmi S11", "Xiaomi Redmi S11", 300000, 100, 10));
+            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+            productDao.insert(new Product("Galaxy S21", "Samsung Galaxy S21", 800000, 100, 10));
+
+            products = productDao.findAll();
+        }
 
     }
 
