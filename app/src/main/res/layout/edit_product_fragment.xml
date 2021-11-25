@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.editproduct.EditProductFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/normal_padding"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_form_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="@color/purple_500"
+                android:padding="@dimen/normal_padding" />
+            <!--        <EditText-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:hint="@string/key_word"-->
+            <!--            android:inputType="textCapWords"-->
+            <!--            android:drawableStart="@mipmap/ic_launcher"-->
+            <!--            />-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_padding"
+                app:hintAnimationEnabled="true"
+                android:hint="@string/designation">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:maxLength="50"
+                    >
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_padding"
+                app:hintAnimationEnabled="true"
+                android:hint="@string/description">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text|textMultiLine"
+                    android:maxLines="5"
+                    android:minLines="3"
+                    >
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_padding"
+                app:hintAnimationEnabled="true"
+                android:hint="@string/price">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:lines="1"
+                    >
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_padding"
+                app:hintAnimationEnabled="true"
+                android:hint="@string/quantity_available">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/quantity_in_stock"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    >
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_padding"
+                app:hintAnimationEnabled="true"
+                android:hint="@string/alert_quantity">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/alert_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    >
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/my_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add"
+                android:padding="@dimen/normal_padding"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:layout_marginVertical="@dimen/medium_margin"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

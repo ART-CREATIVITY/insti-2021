@@ -10,16 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MonPremierProjet">
         <activity
-            android:name=".ProductActivity"
-            android:exported="true"
-            android:label="@string/title_activity_product"
-            android:theme="@style/Theme.MonPremierProjet.NoActionBar">
+            android:name=".NavigatorActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ProductActivity"
+            android:exported="true"
+            android:label="@string/title_activity_product"
+            android:theme="@style/Theme.MonPremierProjet.NoActionBar"></activity>
         <activity
             android:name=".ProductDetailActivity"
             android:exported="true" />
