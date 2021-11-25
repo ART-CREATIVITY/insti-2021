@@ -1,10 +1,11 @@
-package io.artcreativity.monpremierprojet;
+package io.artcreativity.monpremierprojet.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 
+import io.artcreativity.monpremierprojet.R;
 import io.artcreativity.monpremierprojet.entities.Product;
 
 public class ProductDetailActivity extends AppCompatActivity {

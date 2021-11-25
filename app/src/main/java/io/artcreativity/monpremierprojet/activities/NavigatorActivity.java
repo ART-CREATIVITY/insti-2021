@@ -1,4 +1,4 @@
-package io.artcreativity.monpremierprojet;
+package io.artcreativity.monpremierprojet.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -7,6 +7,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 
+import io.artcreativity.monpremierprojet.R;
 import io.artcreativity.monpremierprojet.ui.navigator.NavigatorFragment;
 
 public class NavigatorActivity extends AppCompatActivity {

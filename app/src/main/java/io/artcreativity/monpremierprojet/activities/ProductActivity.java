@@ -1,18 +1,14 @@
-package io.artcreativity.monpremierprojet;
+package io.artcreativity.monpremierprojet.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.SimpleAdapter;
 
@@ -21,8 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.artcreativity.monpremierprojet.R;
 import io.artcreativity.monpremierprojet.adapters.ProductAdapter;
-import io.artcreativity.monpremierprojet.dao.DataBaseHelper;
 import io.artcreativity.monpremierprojet.dao.DataBaseRoom;
 import io.artcreativity.monpremierprojet.dao.ProductDao;
 import io.artcreativity.monpremierprojet.dao.ProductRoomDao;

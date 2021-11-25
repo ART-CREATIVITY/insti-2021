@@ -15,7 +15,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
+    <string name="next">Continuer</string>
     <string name="previous">Previous</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
@@ -25,4 +25,9 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_activity_auth">AuthActivity</string>
+    <string name="enter_phone_number">Veuillez entrer votre numéro de téléphone pour continuer</string>
+    <string name="phone_number">Numéro de téléphone</string>
+    <string name="code">Code</string>
+    <string name="verify">Verifier</string>
 </resources>

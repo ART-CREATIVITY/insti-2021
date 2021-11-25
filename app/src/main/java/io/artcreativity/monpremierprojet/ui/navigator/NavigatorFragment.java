@@ -2,7 +2,6 @@ package io.artcreativity.monpremierprojet.ui.navigator;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,15 +16,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.artcreativity.monpremierprojet.MainActivity;
-import io.artcreativity.monpremierprojet.ProductActivity;
 import io.artcreativity.monpremierprojet.R;
-import io.artcreativity.monpremierprojet.SecondFragment;
 import io.artcreativity.monpremierprojet.adapters.ProductAdapter;
-import io.artcreativity.monpremierprojet.dao.ProductDao;
-import io.artcreativity.monpremierprojet.dao.ProductRoomDao;
-import io.artcreativity.monpremierprojet.databinding.ActivityProductBinding;
-import io.artcreativity.monpremierprojet.databinding.FragmentFirstBinding;
 import io.artcreativity.monpremierprojet.databinding.NavigatorFragmentBinding;
 import io.artcreativity.monpremierprojet.entities.Product;
 
