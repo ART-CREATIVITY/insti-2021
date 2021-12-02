@@ -1,15 +1,20 @@
 package io.artcreativity.monpremierprojet.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthSettings;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
@@ -38,6 +43,7 @@ public class AuthActivity extends AppCompatActivity implements AuthCallback {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     PhoneAuthOptions options;
     String phoneNumber;
+    String verificationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +75,10 @@ public class AuthActivity extends AppCompatActivity implements AuthCallback {
                 .setActivity(this)
                 .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
-                    public void onCodeSent(String verificationId,
+                    public void onCodeSent(String vId,
                                            PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         // Save the verification id somewhere
+                        verificationId =vId;
                         Log.d("TAG", "onCodeSent: " + verificationId);
                         Bundle bundle = new Bundle();
                         bundle.putString("phoneNumber", phoneNumber);
@@ -103,10 +110,29 @@ public class AuthActivity extends AppCompatActivity implements AuthCallback {
 
     @Override
     public void verification(String code) {
-        FirebaseAuthSettings firebaseAuthSettings = auth.getFirebaseAuthSettings();
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+        signInWithCredential(credential);
+    }
 
-// Configure faking the auto-retrieval with the whitelisted numbers.
-        firebaseAuthSettings.setAutoRetrievedSmsCodeForPhoneNumber(phoneNumber, code);
-        PhoneAuthProvider.verifyPhoneNumber(options);
+    private void signInWithCredential(PhoneAuthCredential credential) {
+        // inside this method we are checking if
+        // the code entered is correct or not.
+        auth.signInWithCredential(credential)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // if the code is correct and the task is successful
+                            // we are sending our user to new activity.
+                            Intent i = new Intent(AuthActivity.this, ProductActivity.class);
+                            startActivity(i);
+                            finish();
+                        } else {
+                            // if the code is not correct then we are
+                            // displaying an error message to the user.
+                            Toast.makeText(AuthActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 }
