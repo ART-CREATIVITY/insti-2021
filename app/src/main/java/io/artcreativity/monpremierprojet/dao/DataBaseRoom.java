@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import io.artcreativity.monpremierprojet.entities.Product;
 
-@Database(entities = {Product.class}, version = 1)
+@Database(entities = {Product.class}, version = 2)
 public abstract class DataBaseRoom extends RoomDatabase {
 
     private static DataBaseRoom dataBaseRoom;

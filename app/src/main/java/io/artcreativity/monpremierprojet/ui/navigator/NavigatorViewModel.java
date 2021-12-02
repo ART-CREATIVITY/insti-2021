@@ -14,6 +14,7 @@ import io.artcreativity.monpremierprojet.dao.DataBaseRoom;
 import io.artcreativity.monpremierprojet.dao.ProductDao;
 import io.artcreativity.monpremierprojet.dao.ProductRoomDao;
 import io.artcreativity.monpremierprojet.entities.Product;
+import io.artcreativity.monpremierprojet.webservices.ProductWebService;
 
 public class NavigatorViewModel extends AndroidViewModel {
     // TODO: Implement the ViewModel
@@ -30,7 +31,8 @@ public class NavigatorViewModel extends AndroidViewModel {
     public void loadProduct() {
         Log.d("TAG", "loadProduct: ");
         new Thread(() -> {
-            mutableLiveData.postValue(productRoomDao.findAll());
+            ProductWebService productWebService = new ProductWebService();
+            mutableLiveData.postValue(productWebService.getProducts());
         }).start();
     }
 }

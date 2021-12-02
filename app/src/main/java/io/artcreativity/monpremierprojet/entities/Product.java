@@ -21,6 +21,8 @@ public class Product implements Serializable {
     public double quantityInStock;
     @ColumnInfo(name = "alertQuantity")
     public double alertQuantity;
+    @ColumnInfo(name = "serverId")
+    public int serverId;
 
     public static final String TABLE_NAME = "products";
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY, " +

@@ -10,6 +10,7 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthSettings;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -124,7 +125,14 @@ public class AuthActivity extends AppCompatActivity implements AuthCallback {
                         if (task.isSuccessful()) {
                             // if the code is correct and the task is successful
                             // we are sending our user to new activity.
-                            Intent i = new Intent(AuthActivity.this, ProductActivity.class);
+                            AppPreference appPreference = AppPreference.getInstance(AuthActivity.this);
+                            appPreference.setConnected(true);
+                            FirebaseUser user = auth.getCurrentUser();
+                            if (user != null) {
+                                // User is signed in
+                                appPreference.setUserId(user.getUid());
+                            }
+                            Intent i = new Intent(AuthActivity.this, NavigatorActivity.class);
                             startActivity(i);
                             finish();
                         } else {

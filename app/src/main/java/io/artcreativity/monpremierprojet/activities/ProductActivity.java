@@ -38,6 +38,13 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        AppPreference appPreference = AppPreference.getInstance(this);
+        if(!appPreference.isConnected()) {
+            Intent intent = new Intent(this, AuthActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         binding = ActivityProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
